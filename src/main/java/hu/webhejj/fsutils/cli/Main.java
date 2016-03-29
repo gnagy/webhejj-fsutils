@@ -52,18 +52,9 @@ public class Main {
 			SharedMimeInfoMimeTyper.getInstance();
 			
 			long time = System.currentTimeMillis();
-			
-			FsScanAction scanAction = new FsScanAction(dir);
-			scanAction.perform(monitor);
-			
-			FsScrapeAction scrapeAction = new FsScrapeAction(dir, scanAction.getRootFileInfo());
-			scrapeAction.perform(monitor);
-			
-			XmlFileInfoWriter writer = new XmlFileInfoWriter(new FileOutputStream(output));
-			writer.write(scanAction.getRootFileInfo());
-			
-			writer.close();
-			
+
+            Scraper.scrapeToFile(dir, output);
+
 			System.out.println("Scrape done in " + ((System.currentTimeMillis() - time) / 1024) + "s.");
 		
 		// convert
